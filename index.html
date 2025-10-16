@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cafetería Escolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-primary: #3B82F6;
+      --brand-secondary: #10B981;
+      --brand-light: #EFF6FF;
+      --brand-dark: #1E3A8A;
+      --accent-yellow: #F59E0B;
+      --accent-pink: #EC4899;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-800: #1F2937;
+      --white: #FFFFFF;
+      --red-50: #FEF2F2;
+      --red-100: #FEE2E2;
+      --red-200: #FECACA;
+      --red-400: #F87171;
+      --red-600: #DC2626;
+      --red-700: #B91C1C;
+      --emerald-600: #059669;
+      --amber-600: #D97706;
+      --blue-700: #1D4ED8;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--gray-50);
+      color: var(--gray-600);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .main-content {
+      flex-grow: 1;
+    }
+    
+    .container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    @media (min-width: 640px) {
+      .container { max-width: 640px; padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (min-width: 768px) {
+      .container { max-width: 768px; }
+    }
+    @media (min-width: 1024px) {
+      .container { max-width: 1024px; padding-left: 2rem; padding-right: 2rem; }
+    }
+    @media (min-width: 1280px) {
+      .container { max-width: 1280px; }
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--white);
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 5rem; /* h-20 */
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-brand svg {
+      height: 2.5rem; /* h-10 */
+      width: 2.5rem; /* w-10 */
+      color: var(--brand-primary);
+    }
+
+    .header-brand h1 {
+      margin-left: 0.75rem;
+      font-size: 1.875rem; /* text-3xl */
+      font-weight: 700;
+      color: var(--brand-dark);
+      letter-spacing: -0.025em;
+    }
+
+    .header-nav-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .header-nav {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem; /* text-sm */
+      font-weight: 500;
+      transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+      color: var(--gray-600);
+    }
+    
+    .nav-item:hover {
+      background-color: var(--brand-light);
+      color: var(--brand-dark);
+    }
+    
+    .nav-item.active {
+      background-color: var(--brand-primary);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .nav-item svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0.5rem;
+    }
+
+    .header-user-info {
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+      border-left: 1px solid var(--gray-200);
+    }
+    
+    .header-user-name {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .header-user-name {
+        display: inline;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--gray-600);
+        margin-right: 0.75rem;
+      }
+    }
+
+    #logout-button {
+      padding: 0.5rem;
+      border-radius: 9999px;
+      color: var(--gray-500);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 150ms, background-color 150ms;
+    }
+    #logout-button:hover {
+      background-color: var(--red-100);
+      color: var(--red-600);
+    }
+    #logout-button svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    
+
+    /* Main Content & Page Styles */
+    .page-section {
+      margin-bottom: 3rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title span {
+      margin-right: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    /* Grid Layouts */
+    .grid { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .md-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .lg-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 1280px) { .xl-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+
+    /* Cards */
+    .menu-item-card {
+      background-color: var(--white);
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: all 300ms;
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-item-card:hover { box-shadow: var(--shadow-2xl); }
+    .menu-item-card .card-image-container { position: relative; }
+    .menu-item-card .card-image { width: 100%; height: 14rem; object-fit: cover; }
+    .menu-item-card .card-category-badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background-color: var(--brand-primary);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      box-shadow: var(--shadow-md);
+    }
+    .menu-item-card .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .menu-item-card .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    .menu-item-card .card-description {
+      color: var(--gray-600);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .menu-item-card .card-allergens {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background-color: var(--red-50);
+      border: 1px solid var(--red-200);
+      border-radius: 0.375rem;
+    }
+    .menu-item-card .card-allergens-title {
+      display: flex;
+      align-items: center;
+      color: var(--red-700);
+    }
+    .menu-item-card .card-allergens-title svg { width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; }
+    .menu-item-card .card-allergens-title p { margin: 0; font-size: 0.75rem; font-weight: 600; }
+    .menu-item-card .card-allergens-list {
+      list-style: disc;
+      list-style-position: inside;
+      margin-left: 0.5rem;
+      margin-top: 0.25rem;
+      padding-left: 0;
+    }
+    .menu-item-card .card-allergens-list li { font-size: 0.75rem; color: var(--red-600); }
+    .menu-item-card .card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-item-card .card-price {
+      font-size: 1.875rem;
+      font-weight: 800;
+      color: var(--brand-primary);
+    }
+
+    .promotion-card {
+      background-image: linear-gradient(to bottom right, var(--accent-yellow), #F97316);
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      color: var(--white);
+      transition: all 300ms;
+    }
+    .promotion-card:hover {
+      box-shadow: var(--shadow-2xl);
+      transform: translateY(-4px);
+    }
+    .promotion-card .card-image { width: 100%; height: 12rem; object-fit: cover; opacity: 0.8; }
+    .promotion-card .card-content { padding: 1.5rem; }
+    .promotion-card .card-title-container { display: flex; align-items: center; margin-bottom: 0.5rem; }
+    .promotion-card .card-title-container svg { width: 1.5rem; height: 1.5rem; margin-right: 0.5rem; }
+    .promotion-card .card-title { font-size: 1.5rem; font-weight: 700; margin: 0; }
+    .promotion-card .card-description { font-size: 0.875rem; opacity: 0.9; margin: 0; }
+    
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow-md);
+      transition: all 150ms;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background-color: var(--brand-primary); color: var(--white); }
+    .btn-primary:hover { background-color: var(--blue-700); }
+    .btn-secondary { background-color: var(--brand-secondary); color: var(--white); }
+    .btn-secondary:hover { background-color: var(--emerald-600); }
+    .btn-accent { background-color: var(--accent-yellow); color: var(--white); }
+    .btn-accent:hover { background-color: var(--amber-600); }
+    .btn-full { width: 100%; display: flex; justify-content: center; }
+    .btn:disabled { background-color: #93C5FD; cursor: not-allowed; }
+
+    /* Forms & Filters */
+    .filter-controls { margin-bottom: 2rem; }
+    .search-bar {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background-color: var(--white);
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--gray-300);
+      border-radius: 0.375rem;
+    }
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--brand-primary);
+      border-color: var(--brand-primary);
+    }
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .category-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 150ms;
+      border: none;
+      cursor: pointer;
+      background-color: var(--gray-200);
+      color: var(--gray-700);
+    }
+    .category-btn:hover { background-color: var(--gray-300); }
+    .category-btn.active {
+      background-color: var(--brand-primary);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+    
+    /* Call to Action Section */
+    .cta-section {
+      background-color: var(--brand-light);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-md);
+    }
+    .cta-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .cta-section p { margin-bottom: 1.5rem; color: var(--gray-700); }
+    
+    /* Auth Pages */
+    .auth-container {
+      min-height: 100vh;
+      background-color: var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .auth-card {
+      max-width: 28rem;
+      width: 100%;
+      background-color: var(--white);
+      border-radius: 0.75rem;
+      box-shadow: var(--shadow-2xl);
+      padding: 2rem;
+    }
+    .auth-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .auth-header svg { width: 3rem; height: 3rem; color: var(--brand-primary); margin-bottom: 0.5rem; }
+    .auth-header h1 { font-size: 1.875rem; font-weight: 700; color: var(--brand-dark); margin: 0; }
+    .auth-header p { color: var(--gray-600); margin-top: 0.25rem; }
+    .auth-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-input-group { position: relative; }
+    .form-input-group .icon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      padding-left: 0.75rem;
+    }
+    .form-input-group .icon svg { width: 1.25rem; height: 1.25rem; color: var(--gray-400); }
+    .form-input {
+      width: 100%;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-right: 0.75rem;
+      padding-left: 2.5rem;
+      border: 1px solid var(--gray-300);
+      border-radius: 0.375rem;
+    }
+    .form-input:focus { outline: none; box-shadow: 0 0 0 2px var(--brand-primary); border-color: var(--brand-primary); }
+    .form-link { font-weight: 500; color: var(--brand-primary); text-align: right; font-size: 0.875rem; }
+    .form-link:hover { color: var(--brand-dark); }
+    .form-footer-text { margin-top: 2rem; text-align: center; font-size: 0.875rem; color: var(--gray-600); }
+    .form-error {
+      background-color: var(--red-100);
+      border: 1px solid var(--red-400);
+      color: var(--red-700);
+      padding: 1rem;
+      border-radius: 0.375rem;
+      margin-bottom: 1rem;
+    }
+
+
+    /* Footer */
+    .footer {
+      background-color: var(--brand-dark);
+      color: var(--brand-light);
+      margin-top: auto;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .footer-content { text-align: center; }
+    .footer-content p { margin: 0; }
+    .footer-content .subtitle { font-size: 0.875rem; color: var(--gray-400); margin-top: 0.25rem; }
+
+    /* Utility */
+    .text-center { text-align: center; }
+    .hidden { display: none; }
+  </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-100 font-sans">
+  <div id="root" class="app-container">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="#/" class="header-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2H8C7.44772 2 7 2.44772 7 3V8C7 8.55228 7.44772 9 8 9H16C16.5523 9 17 8.55228 17 8V3C17 2.44772 16.5523 2 16 2ZM15 7H9V4H15V7Z" /><path d="M6 10H5V21C5 21.5523 5.44772 22 6 22C6.55228 22 7 21.5523 7 21V10H6Z" /><path d="M19 10H18V21C18 21.5523 18.4477 22 19 22C19.5523 22 20 21.5523 20 21V10H19Z" /><path d="M11 10.062V21C11 21.5523 11.4477 22 12 22C12.5523 22 13 21.5523 13 21V10.062C12.678 10.0228 12.3444 10 12 10C11.6556 10 11.322 10.0228 11 10.062Z" /></svg>
+            <h1>Mi Cafetería Escolar</h1>
+          </a>
+          <div class="header-nav-container">
+            <nav class="header-nav">
+              <a href="#/" class="nav-item" id="nav-home">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                <span>Inicio</span>
+              </a>
+              <a href="#/menu" class="nav-item" id="nav-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                <span>Menú</span>
+              </a>
+              <a href="#/promociones" class="nav-item" id="nav-promos">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25a2.25 2.25 0 01-2.25-2.25v-8.25M12 4.875A2.625 2.625 0 1012 10.125A2.625 2.625 0 0012 4.875z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 10.125V21.75m0-11.625H4.875c-.621 0-1.125.504-1.125 1.125v2.25c0 .621.504 1.125 1.125 1.125h14.25c.621 0 1.125-.504 1.125-1.125V11.25c0-.621-.504-1.125-1.125-1.125H12z" /></svg>
+                <span>Promociones</span>
+              </a>
+            </nav>
+            <div id="user-info-container" class="header-user-info hidden">
+              <span id="user-name" class="header-user-name"></span>
+              <button id="logout-button" title="Cerrar Sesión">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main id="page-content" class="main-content">
+      <!-- Dynamic content will be injected here -->
+    </main>
+    
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>&copy; 2024 Mi Cafetería Escolar. Todos los derechos reservados.</p>
+        <p class="subtitle">Una forma fácil de ver tu menú escolar.</p>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
